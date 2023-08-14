@@ -1,10 +1,10 @@
-package com.epam.brayan.java;
+package com.example.java.epam.brayan;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class JavaProgramApplicationTests {
+class BrayanApplicationTests {
 
 	@Test
 	void contextLoads() {
