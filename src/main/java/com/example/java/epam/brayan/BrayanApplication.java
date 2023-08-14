@@ -1,13 +1,13 @@
-package com.epam.brayan.java;
+package com.example.java.epam.brayan;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JavaProgramApplication {
+public class BrayanApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JavaProgramApplication.class, args);
+		SpringApplication.run(BrayanApplication.class, args);
 	}
 
 }
