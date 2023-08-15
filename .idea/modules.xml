@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/java-program.iml" filepath="$PROJECT_DIR$/.idea/java-program.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/brayan.main.iml" filepath="$PROJECT_DIR$/.idea/modules/brayan.main.iml" />
     </modules>
   </component>
 </project>
