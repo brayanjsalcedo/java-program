@@ -1,13 +1,40 @@
 package com.example.java.epam.brayan.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.java.epam.brayan.controllers.requests.CreateTicketRequest;
+import com.example.java.epam.brayan.data.entities.Ticket;
+import com.example.java.epam.brayan.services.CreateTicketService;
+import com.example.java.epam.brayan.services.TicketService;
+import com.example.java.epam.brayan.services.TicketsService;
+import com.example.java.epam.brayan.services.data.NewTicket;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
+@Slf4j
 public class TicketController {
+    private final TicketsService ticketsService;
+    private final TicketService ticketService;
+    private final CreateTicketService createTicketService;
 
     @GetMapping("/tickets")
-    public String tickets() {
-        return "Hello World";
+    public Iterable<Ticket> tickets() {
+        log.debug("Listing tickets");
+        return ticketsService.loadTickets();
+    }
+
+    @GetMapping("/tickets/{id}")
+    public Optional<Ticket> ticket(@PathVariable("id") long id) {
+        log.debug("Get ticket by id {}", id);
+        return ticketService.loadTicket(id);
+    }
+
+    @PostMapping("/tickets")
+    public Ticket createTicket(@RequestBody CreateTicketRequest createTicketRequest) {
+        log.debug("Creating a new ticket {}", createTicketRequest);
+        return createTicketService.createTicket(NewTicket.builder().name(createTicketRequest.getName()).category(createTicketRequest.getCategory()).build());
     }
 }

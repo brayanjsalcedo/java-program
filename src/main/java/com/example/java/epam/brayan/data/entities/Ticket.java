@@ -1,10 +1,7 @@
 package com.example.java.epam.brayan.data.entities;
 
 import com.example.java.epam.brayan.consts.Consts;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -12,9 +9,12 @@ import lombok.Data;
 @Table(name = "tickets")
 public class Ticket {
     @Id
+    @GeneratedValue
     long ticketId;
 
     Consts.Category category;
+
+    String name;
 
     @ManyToOne
     User user;
