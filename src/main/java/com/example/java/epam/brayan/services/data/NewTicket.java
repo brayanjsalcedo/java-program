@@ -8,5 +8,7 @@ import lombok.Value;
 @Builder
 public class NewTicket {
     Consts.Category category;
-    String name;
+    long eventId;
+    long userId;
+    int place;
 }

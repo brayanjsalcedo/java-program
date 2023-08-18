@@ -6,16 +6,18 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "tickets")
+@Table(name = "Ticket")
 public class Ticket {
     @Id
     @GeneratedValue
     long ticketId;
 
+    @Enumerated(EnumType.STRING)
     Consts.Category category;
-
-    String name;
 
     @ManyToOne
     User user;
+
+    @ManyToOne
+    Event event;
 }

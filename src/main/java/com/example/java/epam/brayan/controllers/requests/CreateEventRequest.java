@@ -1,16 +1,16 @@
 package com.example.java.epam.brayan.controllers.requests;
 
-import com.example.java.epam.brayan.consts.Consts;
 import lombok.Builder;
 import lombok.Value;
 import lombok.extern.jackson.Jacksonized;
 
+import java.time.Instant;
+
 @Value
 @Jacksonized
 @Builder
-public class CreateTicketRequest {
-    Consts.Category category;
-    long eventId;
-    long userId;
-    int place;
+public class CreateEventRequest {
+    String title;
+
+    Instant date;
 }
