@@ -1,22 +1,25 @@
 package com.example.java.epam.brayan.data.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.Instant;
 
 @Entity
 @Data
-@Table(name = "Event")
 public class Event {
     @Id
-    @GeneratedValue
-    Long eventId;
+    @SequenceGenerator(
+            name = "event_id_sequence",
+            sequenceName = "event_id_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "event_id_sequence"
+    )
+    long id;
 
     String title;
-
     Instant date;
 }

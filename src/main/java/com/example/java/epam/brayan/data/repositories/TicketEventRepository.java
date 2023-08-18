@@ -9,5 +9,7 @@ import java.util.List;
 
 public interface TicketEventRepository extends CrudRepository<Ticket, Long>  {
 
-    List<TicketEvent> findByTicketIdAndCategory(long ticketId, Consts.Category category);
+    default List<TicketEvent> findByIdAndCategory(long id, Consts.Category category) {
+        return null;
+    }
 }

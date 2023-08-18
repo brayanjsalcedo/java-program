@@ -8,6 +8,5 @@ import java.time.Instant;
 @Builder
 public class NewEvent {
     String title;
-
     Instant date;
 }

@@ -1,20 +1,24 @@
 package com.example.java.epam.brayan.data.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name =  "\"User\"")
+@Table(name = "usr")
 public class User {
     @Id
-    @GeneratedValue
-    long userId;
+    @SequenceGenerator(
+            name = "usr_id_sequence",
+            sequenceName = "usr_id_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "usr_id_sequence"
+    )
+    long id;
 
     String name;
-
     String email;
 }
