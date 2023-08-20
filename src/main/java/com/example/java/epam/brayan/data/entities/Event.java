@@ -4,9 +4,12 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
+@Table(name = "events")
 public class Event {
     @Id
     @SequenceGenerator(
@@ -19,6 +22,13 @@ public class Event {
             generator = "event_id_sequence"
     )
     long id;
+
+    @OneToMany(
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+    )
+    private Set<Ticket> tickets = new HashSet<>();
+
 
     String title;
     Instant date;

@@ -11,6 +11,6 @@ public class TicketsService {
     private final TicketRepository ticketRepository;
 
     public Iterable<Ticket> loadTickets() {
-        return ticketRepository.findAll();
+        return ticketRepository.loadTicketsEagerly();
     }
 }

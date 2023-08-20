@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "tickets")
 public class Ticket {
     @Id
     @SequenceGenerator(
@@ -22,13 +23,19 @@ public class Ticket {
     @Enumerated(EnumType.STRING)
     Consts.Category category;
 
-    @ManyToOne
-    @JoinColumn(name = "usr_id", referencedColumnName = "id")
-    User user;
+    @ManyToOne(
+            fetch = FetchType.LAZY,
+            optional = false
+    )
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "event_id", referencedColumnName = "id")
-    Event event;
+    @ManyToOne(
+            fetch = FetchType.LAZY,
+            optional = false
+    )
+    @JoinColumn(name = "event_id")
+    private Event event;
 
     long place;
 }
