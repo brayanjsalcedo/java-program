@@ -13,8 +13,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class CreateTicketService {
@@ -26,20 +24,14 @@ public class CreateTicketService {
     @Transactional
     public Ticket createTicket(NewTicket newTicket) {
         Ticket ticket = newTicketMapper.toTicket(newTicket);
+        User user = userRepository.findById(newTicket.getUserId())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Event event = eventRepository.findById(newTicket.getEventId())
+                .orElseThrow(() -> new EntityNotFoundException("Event not found"));
 
-        Optional<User> userOptional  = userRepository.findById(newTicket.getUserId());
-        Optional<Event> eventOptional  = eventRepository.findById(newTicket.getEventId());
+        ticket.setUser(user);
+        ticket.setEvent(event);
 
-        if (userOptional.isPresent() && eventOptional.isPresent()) {
-            User user = userOptional.get();
-            Event event = eventOptional.get();
-
-            ticket.setUser(user);
-            ticket.setEvent(event);
-
-            return ticketRepository.save(ticket);
-        } else {
-            throw new EntityNotFoundException("User or Event not found");
-        }
+        return ticketRepository.save(ticket);
     }
 }

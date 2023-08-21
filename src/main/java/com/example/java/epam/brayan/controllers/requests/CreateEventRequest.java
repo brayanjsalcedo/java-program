@@ -11,6 +11,5 @@ import java.time.Instant;
 @Builder
 public class CreateEventRequest {
     String title;
-
     Instant date;
 }
