@@ -5,7 +5,7 @@ import com.example.java.epam.brayan.controllers.requests.UpdateTicketRequest;
 import com.example.java.epam.brayan.data.entities.Ticket;
 import com.example.java.epam.brayan.services.*;
 import com.example.java.epam.brayan.services.data.NewTicket;
-import com.example.java.epam.brayan.services.data.UpdateTicket;
+import com.example.java.epam.brayan.services.data.UpdatedTicket;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -65,7 +65,7 @@ public class TicketController {
 
         updateTicketService.updateTicket(
                 id,
-                UpdateTicket.builder()
+                UpdatedTicket.builder()
                         .category(updateTicketRequest.getCategory())
                         .place(updateTicketRequest.getPlace())
                         .build()

@@ -6,7 +6,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class UpdateTicket {
+public class UpdatedTicket {
     Consts.Category category;
     int place;
 }
