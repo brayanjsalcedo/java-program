@@ -3,13 +3,12 @@ package com.example.java.epam.brayan.controllers;
 import com.example.java.epam.brayan.controllers.requests.CreateEventRequest;
 import com.example.java.epam.brayan.data.entities.Event;
 import com.example.java.epam.brayan.services.CreateEventService;
+import com.example.java.epam.brayan.services.TicketEventService;
 import com.example.java.epam.brayan.services.data.NewEvent;
+import com.example.java.epam.brayan.services.data.TicketEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/events")
 public class EventController {
     private final CreateEventService createEventService;
+    private final TicketEventService ticketEventService;
 
     @PostMapping
     public Event createEvent(@RequestBody CreateEventRequest createEventRequest) {
@@ -28,5 +28,16 @@ public class EventController {
                         .date(createEventRequest.getDate())
                         .build()
         );
+    }
+
+    @GetMapping("/{id}/tickets")
+    public Iterable<TicketEvent> getBookedTicketsForEvent(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "10") int pageSize,
+            @RequestParam(defaultValue = "1") int pageNum
+    ) {
+        log.debug("Get booked tickets by event {}", id);
+
+        return ticketEventService.getBookedTickets(id, pageSize, pageNum);
     }
 }
