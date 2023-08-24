@@ -10,14 +10,8 @@ import lombok.Data;
 @Table(name = "tickets")
 public class Ticket {
     @Id
-    @SequenceGenerator(
-            name = "ticket_id_sequence",
-            sequenceName = "ticket_id_sequence",
-            allocationSize = 1
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "ticket_id_sequence"
+            strategy = GenerationType.IDENTITY
     )
     long id;
 
