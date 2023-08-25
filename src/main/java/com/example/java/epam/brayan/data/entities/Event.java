@@ -26,4 +26,5 @@ public class Event {
 
     String title;
     Instant date;
+    double ticketPrice;
 }

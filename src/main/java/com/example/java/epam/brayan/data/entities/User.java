@@ -22,6 +22,9 @@ public class User {
     )
     private Set<Ticket> tickets = new HashSet<>();
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    private UserAccount userAccount;
+
     String name;
     String email;
 }
