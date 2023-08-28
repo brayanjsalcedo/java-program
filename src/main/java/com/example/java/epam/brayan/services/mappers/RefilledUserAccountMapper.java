@@ -11,9 +11,4 @@ import org.springframework.stereotype.Component;
 @Component
 public interface RefilledUserAccountMapper {
     UserAccount refillUserAccount(RefilledUserAccount refilledUserAccount, @MappingTarget UserAccount userAccount);
-
-    default UserAccount addBalances(UserAccount userAccount, RefilledUserAccount refilledUserAccount) {
-        userAccount.setBalance(userAccount.getBalance() + refilledUserAccount.getBalance());
-        return userAccount;
-    }
 }
