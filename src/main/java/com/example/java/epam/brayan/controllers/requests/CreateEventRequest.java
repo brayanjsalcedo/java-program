@@ -12,4 +12,5 @@ import java.time.Instant;
 public class CreateEventRequest {
     String title;
     Instant date;
+    double ticketPrice;
 }

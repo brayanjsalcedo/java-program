@@ -23,7 +23,6 @@ public class Event {
     )
     private Set<Ticket> tickets = new HashSet<>();
 
-
     String title;
     Instant date;
     double ticketPrice;

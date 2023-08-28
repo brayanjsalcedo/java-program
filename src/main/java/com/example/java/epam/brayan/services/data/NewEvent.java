@@ -9,4 +9,5 @@ import java.time.Instant;
 public class NewEvent {
     String title;
     Instant date;
+    double ticketPrice;
 }
