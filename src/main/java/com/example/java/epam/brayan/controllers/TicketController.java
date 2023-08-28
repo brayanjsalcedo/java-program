@@ -10,6 +10,7 @@ import com.example.java.epam.brayan.services.data.UpdatedTicket;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
 
@@ -25,9 +26,14 @@ public class TicketController {
     private final UpdateTicketService updateTicketService;
 
     @GetMapping
-    public Iterable<Ticket> tickets() {
+    public ModelAndView tickets() {
         log.debug("Listing tickets");
-        return ticketsService.loadTickets();
+        Iterable<Ticket> tickets = ticketsService.loadTickets();
+
+        ModelAndView mav = new ModelAndView("tickets");
+
+        mav.addObject("tickets", tickets);
+        return mav;
     }
 
     @GetMapping("{id}")
