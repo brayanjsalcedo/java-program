@@ -26,6 +26,7 @@ public class EventController {
                 NewEvent.builder()
                         .title(createEventRequest.getTitle())
                         .date(createEventRequest.getDate())
+                        .ticketPrice(createEventRequest.getTicketPrice())
                         .build()
         );
     }

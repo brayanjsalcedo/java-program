@@ -2,6 +2,7 @@ package com.example.java.epam.brayan.controllers;
 
 import com.example.java.epam.brayan.controllers.requests.CreateTicketRequest;
 import com.example.java.epam.brayan.controllers.requests.UpdateTicketRequest;
+import com.example.java.epam.brayan.controllers.responses.CreateTicketResponse;
 import com.example.java.epam.brayan.data.entities.Ticket;
 import com.example.java.epam.brayan.services.*;
 import com.example.java.epam.brayan.services.data.NewTicket;
@@ -36,10 +37,10 @@ public class TicketController {
     }
 
     @PostMapping
-    public Ticket createTicket(@RequestBody CreateTicketRequest createTicketRequest) {
+    public CreateTicketResponse createTicket(@RequestBody CreateTicketRequest createTicketRequest) {
         log.debug("Creating a new ticket {}", createTicketRequest);
 
-        return createTicketService.createTicket(
+        Ticket ticket = createTicketService.createTicket(
                 NewTicket.builder()
                         .category(createTicketRequest.getCategory())
                         .place(createTicketRequest.getPlace())
@@ -47,6 +48,12 @@ public class TicketController {
                         .userId(createTicketRequest.getUserId())
                         .build()
         );
+
+        return CreateTicketResponse.builder()
+                .category(ticket.getCategory())
+                .eventId(ticket.getEvent().getId())
+                .userId(ticket.getUser().getId())
+                .build();
     }
 
     @DeleteMapping("{id}")
