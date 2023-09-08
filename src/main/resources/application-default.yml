@@ -2,6 +2,10 @@ server:
   port: 8080
 
 spring:
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
   datasource:
     jdbc-url: jdbc:postgresql://localhost:5332/bj
     username: brayan
@@ -22,3 +26,5 @@ logging:
   level:
     org.flywaydb: DEBUG
     org.springframework.boot.autoconfigure.orm.jpa: DEBUG
+activemq:
+  topic: ticket-booking-queue
