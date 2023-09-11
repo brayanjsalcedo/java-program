@@ -4,9 +4,11 @@ import com.example.java.epam.brayan.controllers.requests.CreateTicketRequest;
 import com.example.java.epam.brayan.controllers.requests.UpdateTicketRequest;
 import com.example.java.epam.brayan.controllers.responses.CreateTicketResponse;
 import com.example.java.epam.brayan.data.entities.Ticket;
+import com.example.java.epam.brayan.jms.producers.TicketBookingPublisher;
 import com.example.java.epam.brayan.services.*;
 import com.example.java.epam.brayan.services.data.NewTicket;
 import com.example.java.epam.brayan.services.data.UpdatedTicket;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,7 @@ public class TicketController {
     private final CreateTicketService createTicketService;
     private final DeleteTicketService deleteTicketService;
     private final UpdateTicketService updateTicketService;
+    private final TicketBookingPublisher jmsService;
 
     @GetMapping
     public ModelAndView tickets() {
@@ -43,7 +46,7 @@ public class TicketController {
     }
 
     @PostMapping
-    public CreateTicketResponse createTicket(@RequestBody CreateTicketRequest createTicketRequest) {
+    public CreateTicketResponse createTicket(@Valid @RequestBody CreateTicketRequest createTicketRequest) {
         log.debug("Creating a new ticket {}", createTicketRequest);
 
         Ticket ticket = createTicketService.createTicket(
@@ -60,6 +63,13 @@ public class TicketController {
                 .eventId(ticket.getEvent().getId())
                 .userId(ticket.getUser().getId())
                 .build();
+    }
+
+    @PostMapping("/async")
+    public String createTicketAsync(@RequestBody CreateTicketRequest createTicketRequest) {
+        jmsService.sendTicketRequest(createTicketRequest);
+
+        return "Your request is being processed asynchronously. Please wait.";
     }
 
     @DeleteMapping("{id}")
